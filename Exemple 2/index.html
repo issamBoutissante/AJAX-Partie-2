@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemple 1</title>
+  </head>
+  <style>
+    body {
+      background-color: rgba(0, 4, 255, 0.733);
+      color: white;
+    }
+    body * {
+      margin-top: 100px;
+    }
+    button {
+      padding: 10px;
+      border-radius: 5px;
+      color: rgb(0, 38, 255);
+      background-color: white;
+    }
+  </style>
+  <body>
+    <center>
+      <div>click the button to load the data here</div>
+      <button>bring data</button>
+    </center>
+  </body>
+  <script src="../jquery.js"></script>
+  <script>
+    $(() => {
+      $("button").click(() => {
+        $("div").load("../file.txt", (data, statusTxt, xhr) => {
+          if (statusTxt == "success") alert("data loaded successfully");
+          else alert("error :" + xhr.status + " : " + xhr.statusText);
+        });
+      });
+    });
+  </script>
+</html>

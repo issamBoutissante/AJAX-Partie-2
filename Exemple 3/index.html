@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemple 1</title>
+  </head>
+  <style>
+    table {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td,
+    th {
+      border: 1px solid #ddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #ddd;
+    }
+  </style>
+  <body>
+    <h2>Table filtrable</h2>
+    <p>
+      Tapez quelque chose dans le champ de saisie pour chercher dans le tableau
+      les prenoms,noms de famille ou e-mails
+    </p>
+    <input type="text" placeholder="Search..." id="myInput" />
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <tr>
+          <td>Issam</td>
+          <td>Boutissante</td>
+          <td>boutissante.issam.dev@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Salama</td>
+          <td>Daali</td>
+          <td>Salama@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Chaimae</td>
+          <td>Mazzouz</td>
+          <td>Mazzouz.Chaimae.dev@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Oussama</td>
+          <td>Boutissante</td>
+          <td>boutissante.oussam.dev@gmail.com</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Notez que nous commencons la recherche dans tbody,pour eviter de filtrer
+      les en-tetes de tale.
+    </p>
+  </body>
+  <script src="../jquery.js"></script>
+  <script>
+    $(() => {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+      });
+    });
+  </script>
+</html>

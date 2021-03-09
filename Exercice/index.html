@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 5px;
+      }
+      button {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Section</th>
+            <th>Niveau</th>
+            <th>Cours</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button>Remplir Le Table</button>
+    </center>
+  </body>
+  <script src="../jquery.js"></script>
+  <script>
+    $(() => {
+      $("button").click(() => {
+        $.ajax({
+          url: "Stagiaire.xml",
+          dataType: "xml",
+          success: (data) => {
+            $(data)
+              .find("st")
+              .each(function () {
+                var ligne = `
+                <tr>
+                    <td>${$(this).find("Nom").text()}</td>
+                    <td>${$(this).find("Section").text()}</td>
+                    <td>${$(this).find("Niveau").text()}</td>
+                    <td>${$(this).find("Cours").text()}</td>
+                </tr>
+                `;
+                $("table tbody").append(ligne);
+              });
+          },
+        });
+      });
+    });
+  </script>
+</html>
